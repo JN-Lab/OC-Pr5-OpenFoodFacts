@@ -7,12 +7,12 @@ import urllib.parse
 import re
 
 import requests
-
 import pymysql
 
 import constants as c
 
 class DatabaseCreation:
+    """ This class creates the database linked to the program """
 
     def __init__(self, host, username, password, database):
         self.host = host
@@ -93,9 +93,9 @@ class DatabaseCreation:
     def __inject_products_page(self, data, category_name):
         """ This method injects all the products from a page """
 
+        print("Injection des produits de la catégorie {}".format(category_name))
         for product in data:
             product_info = self.__get_product_information(product)
-            print(product_info)
             if product_info['injection']:
                 self.__inject_product(product_info, category_name)
 
