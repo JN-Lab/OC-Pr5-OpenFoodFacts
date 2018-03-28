@@ -4,7 +4,6 @@
 import argparse
 
 from dbcreation import DatabaseCreation
-import password as pw
 
 def parse_arguments():
 
@@ -18,7 +17,7 @@ def main():
     args = parse_arguments()
 
     if args.database == 'create':
-        database = DatabaseCreation(pw.HOST, pw.USERNAME, pw.PASSWORD, pw.DATABASE)
+        database = DatabaseCreation()
         database.prepare()
 
     elif args.database == 'update':

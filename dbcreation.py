@@ -9,30 +9,14 @@ import re
 import requests
 import pymysql
 
+from dbconnexion import SQLconnexion
 import constants as c
 
 class DatabaseCreation:
     """ This class creates the database linked to the program """
 
-    def __init__(self, host, username, password, database):
-        self.host = host
-        self.username = username
-        self.password = password
-        self.database = database
+    def __init__(self):
         self.categories = []
-
-    @contextmanager
-    def database_connexion(self):
-        """ This is a context manager to manage the database connexion """
-
-        try:
-            connexion = pymysql.connect(host = self.host, user = self.username, passwd = self.password, db = self.database, charset = 'utf8mb4')
-            yield connexion
-        except TypeError as message:
-            print("Error : something wrong happened -> ", message)
-            connexion.rollback()
-        finally:
-            connexion.close()
 
     def __get_search_url(self, category, page_size, page):
         """ This method creates the products url needed """
@@ -85,7 +69,6 @@ class DatabaseCreation:
         """ This method gets the json linked to a specific page """
 
         url = self.__get_search_url(category['name'], page_size, page)
-        print(url)
 
         request = requests.get(url)
         return request.json()
@@ -149,7 +132,7 @@ class DatabaseCreation:
 
     def __inject_product(self, product, category_name):
 
-        with self.database_connexion() as connexion:
+        with SQLconnexion() as connexion:
             with connexion.cursor() as cursor:
                 sql = "INSERT INTO Product (product_name, product_sku, product_description, store, website_link, nutriscore, category_id) \
                     SELECT %s, %s, %s, %s, %s, %s, id AS cat_id \
@@ -160,7 +143,7 @@ class DatabaseCreation:
     def __inject_categories(self):
         """ This method injects in the database the categories selected """
 
-        with self.database_connexion() as connexion:
+        with SQLconnexion() as connexion:
             for category in self.categories:
                 with connexion.cursor() as cursor:
                     sql = "INSERT INTO Category (category_name, category_product_number) VALUES (%s, %s)"
@@ -254,7 +237,7 @@ class DatabaseCreation:
 
         print('DEBUT : Création de la base de données')
 
-        with self.database_connexion() as connexion:
+        with SQLconnexion() as connexion:
             with connexion.cursor() as cursor:
                 sql = "SET NAMES utf8mb4"
                 cursor.execute(sql)
