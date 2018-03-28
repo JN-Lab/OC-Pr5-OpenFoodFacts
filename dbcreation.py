@@ -1,13 +1,11 @@
 #! /usr/bin/env python3
 # coding: utf-8
 
-from contextlib import contextmanager
 from math import ceil
 import urllib.parse
 import re
 
 import requests
-import pymysql
 
 from dbconnexion import SQLconnexion
 import constants as c

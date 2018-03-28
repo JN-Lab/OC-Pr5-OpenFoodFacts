@@ -4,6 +4,7 @@
 import argparse
 
 from dbcreation import DatabaseCreation
+from interface import Interface
 
 def parse_arguments():
 
@@ -19,13 +20,11 @@ def main():
     if args.database == 'create':
         database = DatabaseCreation()
         database.prepare()
-
     elif args.database == 'update':
         pass
-
-    print('READY TO PLAY')
-    #interface = Interface()
-    #interface.start()
+        
+    interface = Interface()
+    interface.start()
 
 if __name__ == "__main__":
     main()
