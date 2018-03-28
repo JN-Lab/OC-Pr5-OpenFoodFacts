@@ -25,6 +25,8 @@ def main():
         pass
 
     print('READY TO PLAY')
+    #interface = Interface()
+    #interface.start()
 
 if __name__ == "__main__":
     main()
