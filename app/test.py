@@ -20,6 +20,7 @@ def main():
         database = CreateDatabase()
         database.prepare()
         database.feed_categories()
+        database.feed_products()
     elif args.database == 'update':
         pass
 

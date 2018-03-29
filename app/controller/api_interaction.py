@@ -2,6 +2,7 @@
 # coding: utf-8
 
 import re
+import math
 import urllib.parse
 import requests
 from .controller_constants import *
@@ -106,3 +107,23 @@ class OpenFoodFactsInteractions:
                 return False
         else:
             return False
+
+    def get_product_pages_number(self, category, products_per_page):
+        """ This method gets the necessary page number to request for a category """
+
+        url = self.__get_search_url(category, '20', '1')
+
+        request = requests.get(url)
+        data = request.json()
+
+        page_number = math.ceil(int(data['count']) / int(products_per_page))
+
+        return page_number
+
+    def get_product_page(self, category, page_size, page):
+        """ This method gets the json linked to a specific page """
+
+        url = self.__get_search_url(category, page_size, page)
+
+        request = requests.get(url)
+        return request.json()

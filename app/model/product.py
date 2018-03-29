@@ -27,3 +27,12 @@ class ProductDatabase:
                     PRIMARY KEY (id) \
                     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4"
                 cursor.execute(sql)
+
+    def inject_product(self, product, category_name):
+        with SQLconnexion() as connexion:
+            with connexion.cursor() as cursor:
+                sql = "INSERT INTO Product (product_name, product_sku, product_description, store, website_link, nutriscore, category_id) \
+                    SELECT %s, %s, %s, %s, %s, %s, id AS cat_id \
+                    FROM Category WHERE category_name = %s"
+                cursor.execute(sql, (product['name'], product['ref'], product['description'], product['store'], product['url'], product['score'], category_name))
+            connexion.commit()        
