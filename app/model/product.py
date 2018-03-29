@@ -2,12 +2,12 @@
 # coding: utf-8
 from .dbconnexion import SQLconnexion
 
-class Product:
+class ProductDatabase:
 
     def __init__(self):
         pass
 
-    def create_product_db(self):
+    def create_db(self):
         """ This method creates the product database """
         with SQLconnexion() as connexion:
             with connexion.cursor() as cursor:

@@ -3,7 +3,7 @@
 
 import argparse
 
-from model.product import Product
+from controller.dbcreation import CreateDatabase
 
 def parse_arguments():
 
@@ -17,8 +17,8 @@ def main():
     args = parse_arguments()
 
     if args.database == 'create':
-        database = Product()
-        database.create_product_db()
+        database = CreateDatabase()
+        database.prepare()
     elif args.database == 'update':
         pass
 
