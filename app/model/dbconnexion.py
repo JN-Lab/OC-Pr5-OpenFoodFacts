@@ -1,16 +1,16 @@
 #! /usr/bin/env python3
 # coding: utf-8
 
-import password as pw
+from .password import *
 import pymysql
 
 class SQLconnexion(object):
 
     def __init__(self):
-        self.host = pw.HOST
-        self.username = pw.USERNAME
-        self.password = pw.PASSWORD
-        self.database = pw.DATABASE
+        self.host = HOST
+        self.username = USERNAME
+        self.password = PASSWORD
+        self.database = DATABASE
         self.connexion = None
 
     def __enter__(self):

@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 # coding: utf-8
-from dbconnexion import SQLconnexion
+from .dbconnexion import SQLconnexion
 
 class Product:
 

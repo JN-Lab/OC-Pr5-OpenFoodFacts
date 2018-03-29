@@ -3,8 +3,7 @@
 
 import argparse
 
-from dbcreation import DatabaseCreation
-from interface import Interface
+from model.product import Product
 
 def parse_arguments():
 
@@ -18,13 +17,10 @@ def main():
     args = parse_arguments()
 
     if args.database == 'create':
-        database = DatabaseCreation()
-        database.prepare()
+        database = Product()
+        database.create_product_db()
     elif args.database == 'update':
         pass
-
-    interface = Interface()
-    interface.start()
 
 if __name__ == "__main__":
     main()
