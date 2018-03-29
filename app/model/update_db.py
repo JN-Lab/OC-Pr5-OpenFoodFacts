@@ -2,23 +2,22 @@
 # coding: utf-8
 from .dbconnexion import SQLconnexion
 
-class CategoryDatabase:
+class UpdateDatabase:
 
     def __init__(self):
         pass
 
     def create_db(self):
-        """ This method creates the category database """
+        """ This method creates the database to manage the update """
         with SQLconnexion() as connexion:
             with connexion.cursor() as cursor:
-                sql = "DROP TABLE IF EXISTS Category"
+                sql = "DROP TABLE IF EXISTS Database_update"
                 cursor.execute(sql)
 
             with connexion.cursor() as cursor:
-                sql = "CREATE TABLE Category ( \
-                    id TINYINT UNSIGNED NOT NULL AUTO_INCREMENT, \
-                    category_name VARCHAR(70) NOT NULL, \
-                    category_product_number SMALLINT UNSIGNED, \
+                sql = "CREATE TABLE Database_update ( \
+                    id INT UNSIGNED NOT NULL AUTO_INCREMENT, \
+                    update_date DATE NOT NULL, \
                     PRIMARY KEY (id) \
                     ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4"
                 cursor.execute(sql)
