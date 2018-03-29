@@ -15,9 +15,9 @@ class UpdateDatabase:
                 cursor.execute(sql)
 
             with connexion.cursor() as cursor:
-                sql = "CREATE TABLE Database_update ( \
-                    id INT UNSIGNED NOT NULL AUTO_INCREMENT, \
-                    update_date DATE NOT NULL, \
-                    PRIMARY KEY (id) \
-                    ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4"
+                sql = """CREATE TABLE Database_update (
+                    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+                    update_date DATE NOT NULL,
+                    PRIMARY KEY (id)
+                    ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4"""
                 cursor.execute(sql)
