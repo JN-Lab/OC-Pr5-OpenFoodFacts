@@ -15,10 +15,19 @@ class CategoryDatabase:
                 cursor.execute(sql)
 
             with connexion.cursor() as cursor:
-                sql = "CREATE TABLE Category ( \
-                    id TINYINT UNSIGNED NOT NULL AUTO_INCREMENT, \
-                    category_name VARCHAR(70) NOT NULL, \
-                    category_product_number SMALLINT UNSIGNED, \
-                    PRIMARY KEY (id) \
-                    ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4"
+                sql = """CREATE TABLE Category (
+                    id TINYINT UNSIGNED NOT NULL AUTO_INCREMENT,
+                    category_name VARCHAR(70) NOT NULL,
+                    PRIMARY KEY (id)
+                    ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4"""
                 cursor.execute(sql)
+
+    def inject_categories(self, category_list):
+        """ This method injects the categories from a list """
+
+        with SQLconnexion() as connexion:
+            for category in category_list:
+                with connexion.cursor() as cursor:
+                    sql = "INSERT INTO Category (category_name) VALUES (%s)"
+                    cursor.execute(sql, (category))
+                connexion.commit()

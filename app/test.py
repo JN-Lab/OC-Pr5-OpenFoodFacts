@@ -19,6 +19,7 @@ def main():
     if args.database == 'create':
         database = CreateDatabase()
         database.prepare()
+        database.feed_categories()
     elif args.database == 'update':
         pass
 

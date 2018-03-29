@@ -5,6 +5,7 @@ from model.product import ProductDatabase
 from model.category import CategoryDatabase
 from model.registered_product import RegisteredProductDatabase
 from model.update_db import UpdateDatabase
+from .api_interaction import OpenFoodFactsInteractions
 
 class CreateDatabase:
 
@@ -13,6 +14,7 @@ class CreateDatabase:
         self.db_product = ProductDatabase()
         self.db_category = CategoryDatabase()
         self.db_update = UpdateDatabase()
+        self.api = OpenFoodFactsInteractions()
 
 
     def prepare(self):
@@ -26,3 +28,9 @@ class CreateDatabase:
 
         # Foreign keys are Created
         self.db_registered_product.create_keys()
+
+    def feed_categories(self):
+        """ This method injects the categories from OpenFoodFacts into the database """
+
+        self.api.get_categories()
+        self.db_category.inject_categories(self.api.category_list)
