@@ -31,3 +31,12 @@ class CategoryDatabase:
                     sql = "INSERT INTO Category (category_name) VALUES (%s)"
                     cursor.execute(sql, (category))
                 connexion.commit()
+
+    def get_categories(self):
+        """ This method gets the categories selected for the app """
+        with SQLconnexion() as connexion:
+            with connexion.cursor() as cursor:
+                sql = "SELECT category_name FROM Category"
+                cursor.execute(sql)
+                result = cursor.fetchall()
+                return result

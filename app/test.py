@@ -20,8 +20,6 @@ def main():
     if args.database == 'create':
         database = CreateDatabase()
         database.prepare()
-        database.feed_categories()
-        database.feed_products()
     elif args.database == 'update':
         database = UpdateDatabase()
         database.update_database()

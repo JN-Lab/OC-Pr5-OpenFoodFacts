@@ -24,6 +24,7 @@ class RegisteredProductDatabase:
                 cursor.execute(sql)
 
     def create_keys(self):
+        """ This method creates the necessary keys """
         with SQLconnexion() as connexion:
             with connexion.cursor() as cursor:
                 sql = """ALTER TABLE Product_registered
@@ -33,6 +34,7 @@ class RegisteredProductDatabase:
                 cursor.execute(sql)
 
     def get_product_ref(self):
+        """ This method gets the product sku from the product registered """
         with SQLconnexion() as connexion:
             with connexion.cursor() as cursor:
                 sql = """SELECT product_sku FROM Product
