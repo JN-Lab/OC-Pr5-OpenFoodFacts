@@ -31,7 +31,6 @@ class CreateDatabase:
 
     def feed_categories(self):
         """ This method injects the categories from OpenFoodFacts into the database """
-
         self.api.get_categories()
         self.db_category.inject_categories(self.api.category_list)
 
@@ -41,10 +40,12 @@ class CreateDatabase:
 
         page_size = 1000
         for category in self.api.category_list:
-            page_number = self.api.get_product_pages_number(category, str(page_size)) # A créer
+            page_number = self.api.get_product_pages_number(category, str(page_size))
             for page in range(1, page_number + 1, 1):
-                data = self.api.get_product_page(category, str(page_size), str(page)) # A créer
-                self.__manage_products_injection(data['products'], category) # A créer
+                data = self.api.get_product_page(category, str(page_size), str(page))
+                self.__manage_products_injection(data['products'], category)
+
+        self.db_update.inject_update_date()
 
     def __manage_products_injection(self, data, category):
         print("Injection des produits de la catégorie {}".format(category))

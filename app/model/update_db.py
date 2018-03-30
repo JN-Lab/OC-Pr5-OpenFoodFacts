@@ -21,3 +21,12 @@ class UpdateDatabase:
                     PRIMARY KEY (id)
                     ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4"""
                 cursor.execute(sql)
+
+    def inject_update_date(self):
+        """ This method injects the date when an update is done """
+        with SQLconnexion() as connexion:
+            with connexion.cursor() as cursor:
+                sql = """INSERT INTO Database_update (update_date)
+                    VALUES (CURDATE())"""
+                cursor.execute(sql)
+            connexion.commit()
