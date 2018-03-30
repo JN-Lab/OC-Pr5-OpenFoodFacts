@@ -2,7 +2,7 @@
 # coding: utf-8
 from .dbconnexion import SQLconnexion
 
-class UpdateDatabase:
+class LogDatabase:
 
     def __init__(self):
         pass
@@ -30,3 +30,14 @@ class UpdateDatabase:
                     VALUES (CURDATE())"""
                 cursor.execute(sql)
             connexion.commit()
+
+    def get_last_update_date(self):
+        """ This method gets the last update date and return a datetime.date """
+        with SQLconnexion() as connexion:
+            with connexion.cursor() as cursor:
+                sql = """SELECT update_date FROM Database_update
+                    ORDER BY update_date DESC
+                    LIMIT 1"""
+                cursor.execute(sql)
+                result = cursor.fetchone()
+                return result[0]

@@ -4,7 +4,7 @@
 from model.product import ProductDatabase
 from model.category import CategoryDatabase
 from model.registered_product import RegisteredProductDatabase
-from model.update_db import UpdateDatabase
+from model.update_db import LogDatabase
 from .api_interaction import OpenFoodFactsInteractions
 
 class CreateDatabase:
@@ -13,7 +13,7 @@ class CreateDatabase:
         self.db_registered_product = RegisteredProductDatabase()
         self.db_product = ProductDatabase()
         self.db_category = CategoryDatabase()
-        self.db_update = UpdateDatabase()
+        self.db_update = LogDatabase()
         self.api = OpenFoodFactsInteractions()
 
 
