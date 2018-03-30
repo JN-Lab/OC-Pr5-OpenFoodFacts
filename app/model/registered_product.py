@@ -31,3 +31,14 @@ class RegisteredProductDatabase:
                     FOREIGN KEY (product_id)
                     REFERENCES Product (id) ON DELETE CASCADE"""
                 cursor.execute(sql)
+
+    def get_product_ref(self):
+        with SQLconnexion() as connexion:
+            with connexion.cursor() as cursor:
+                sql = """SELECT product_sku FROM Product
+                    WHERE id IN
+                        (SELECT product_id
+                        FROM Product_registered)"""
+                cursor.execute(sql)
+                result = cursor.fetchall()
+                return result

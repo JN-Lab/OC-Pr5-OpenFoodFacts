@@ -24,7 +24,7 @@ def main():
         database.feed_products()
     elif args.database == 'update':
         database = UpdateDatabase()
-        database.update_decision()
+        database.update_database()
 
 if __name__ == "__main__":
     main()

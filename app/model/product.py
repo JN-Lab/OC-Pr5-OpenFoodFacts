@@ -28,6 +28,12 @@ class ProductDatabase:
                     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4"""
                 cursor.execute(sql)
 
+    def drop_db(self):
+        with SQLconnexion() as connexion:
+            with connexion.cursor() as cursor:
+                sql = "DROP TABLE IF EXISTS Product"
+                cursor.execute(sql)
+
     def inject_product(self, product, category_name):
         with SQLconnexion() as connexion:
             with connexion.cursor() as cursor:

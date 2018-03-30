@@ -2,15 +2,24 @@
 # coding: utf-8
 import datetime
 from model.update_db import LogDatabase
+from model.product import ProductDatabase
+from model.registered_product import RegisteredProductDatabase
 
 class UpdateDatabase:
 
     def __init__(self):
         self.daily_date = datetime.date.today()
+        self.db_registered_product = RegisteredProductDatabase()
         self.db_update = LogDatabase()
+        self.db_product = ProductDatabase()
+        self.update = self.__update_decision()
 
     def update_database(self):
         """This method updates the database with modification identified in API response """
+        if self.update:
+            saved_products_ref_tuple = self.db_registered_product.get_product_ref()
+            print(saved_products_ref_list)
+            print(type(saved_products_ref_list))
         # Si update_decision is True
         # Je récupère les ref des produits enregistrés dans un tableau
         # Je supprime la base produit et produits enregistrés
@@ -24,10 +33,10 @@ class UpdateDatabase:
 
         pass
 
-    def update_decision(self):
+    def __update_decision(self):
         """ This method decides if an update of the database has to be done """
         last_update_date = self.db_update.get_last_update_date() #type: datetime.date
         duration = self.daily_date - last_update_date #type: datetime.timedelta
 
-        if duration.days >= 7:
+        if duration.days >= 0:
             return True
