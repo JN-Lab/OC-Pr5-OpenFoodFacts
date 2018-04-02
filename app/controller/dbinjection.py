@@ -36,8 +36,6 @@ class InjectData:
                 data = self.api.get_product_page(category, str(page_size), str(page))
                 self.__manage_products_injection(data['products'], category)
 
-        self.db_update.inject_update_date()
-
     def __manage_products_injection(self, data, category):
         print("Injection des produits de la catégorie {}".format(category))
         for product in data:

@@ -46,6 +46,7 @@ class UpdateDatabase:
                     self.db_registered_product.inject_product(product_ref, 'indisponible')
 
             #Don't forget to update the update date
+            self.db_update.inject_update_date()
 
     def __update_decision(self):
         """ This method decides if an update of the database has to be done """

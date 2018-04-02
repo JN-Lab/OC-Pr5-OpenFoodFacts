@@ -31,3 +31,6 @@ class CreateDatabase:
         # Databases are feed
         self.db_injection.feed_categories()
         self.db_injection.feed_products("create")
+
+        # Update date is registered
+        self.db_update.inject_update_date()
