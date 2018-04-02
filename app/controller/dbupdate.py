@@ -22,9 +22,9 @@ class UpdateDatabase:
     def update_database(self):
         """ This method updates the database with modification identified in API response """
         if self.update:
-            saved_products_ref_tuple = self.db_registered_product.get_products_ref()
-            print(saved_products_ref_tuple)
-            print(type(saved_products_ref_tuple))
+            saved_products_ref_list = self.db_registered_product.get_products_ref()
+            print(saved_products_ref_list)
+            print(type(saved_products_ref_list))
 
             #We delete registered_product and product tables and recreate them empty
             self.db_registered_product.create_db()
@@ -35,16 +35,15 @@ class UpdateDatabase:
             self.db_injection.feed_products("update")
 
             #for each ref from saved_products_ref_tuple:
-            for product_ref in saved_products_ref_tuple:
+            for product_ref in saved_products_ref_list:
                 product_id = self.db_product.select_product_from_ref(product_ref)
-                print(product_id)
+                print(product_ref)
                 if product_id:
                     print('injection produit disponible')
                     self.db_registered_product.inject_product(product_ref, 'disponible')
                 else:
                     print('injection produit indisponible')
                     self.db_registered_product.inject_product(product_ref, 'indisponible')
-
 
             #Don't forget to update the update date
 

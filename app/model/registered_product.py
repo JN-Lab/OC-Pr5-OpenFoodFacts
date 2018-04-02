@@ -56,7 +56,7 @@ class RegisteredProductDatabase:
             with connexion.cursor() as cursor:
                 sql = """INSERT INTO Product_registered
                         (product_id, product_availability)
-                    SELECT id AS pr_id, %s
-                    FROM Product WHERE %s = Product.product_sku """
-            cursor.execute(sql, (availability, product_ref))
-        connexion.commit()
+                    SELECT Product.id, %s
+                    FROM Product WHERE Product.product_sku = %s"""
+                cursor.execute(sql, (availability, product_ref))
+            connexion.commit()
