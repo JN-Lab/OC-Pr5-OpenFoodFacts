@@ -19,12 +19,18 @@ class InjectData:
         self.api.get_categories()
         self.db_category.inject_categories(self.api.category_list)
 
-    def feed_products(self):
+    def feed_products(self, status):
         """ This method injects the products linked to the categories selected
         into the database """
 
+        category_list = []
+        if status == "create":
+            category_list = self.api.category_list
+        elif status == "update":
+            category_list = self.db_category.get_categories()
+
         page_size = 1000
-        for category in self.api.category_list:
+        for category in category_list:
             page_number = self.api.get_product_pages_number(category, str(page_size))
             for page in range(1, page_number + 1, 1):
                 data = self.api.get_product_page(category, str(page_size), str(page))

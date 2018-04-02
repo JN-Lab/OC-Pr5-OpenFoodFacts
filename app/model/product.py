@@ -37,3 +37,12 @@ class ProductDatabase:
                     FROM Category WHERE category_name = %s"""
                 cursor.execute(sql, (product['name'], product['ref'], product['description'], product['store'], product['url'], product['score'], category_name))
             connexion.commit()
+
+    def select_product_from_ref(self, product_ref):
+        with SQLconnexion() as connexion:
+            with connexion.cursor() as cursor:
+                sql = """SELECT id FROM Product
+                    WHERE product_sku = %s"""
+                cursor.execute(sql, (product_ref))
+                result = cursor.fetchone()
+                return result[0]

@@ -5,6 +5,7 @@ from model.update_db import LogDatabase
 from model.product import ProductDatabase
 from model.registered_product import RegisteredProductDatabase
 from model.category import CategoryDatabase
+from .dbinjection import InjectData
 
 class UpdateDatabase:
 
@@ -14,12 +15,14 @@ class UpdateDatabase:
         self.db_update = LogDatabase()
         self.db_category = CategoryDatabase()
         self.db_product = ProductDatabase()
+        self.db_injection = InjectData()
+
         self.update = self.__update_decision()
 
     def update_database(self):
-        """This method updates the database with modification identified in API response """
+        """ This method updates the database with modification identified in API response """
         if self.update:
-            saved_products_ref_tuple = self.db_registered_product.get_product_ref()
+            saved_products_ref_tuple = self.db_registered_product.get_products_ref()
             print(saved_products_ref_tuple)
             print(type(saved_products_ref_tuple))
 
@@ -28,22 +31,22 @@ class UpdateDatabase:
             self.db_product.create_db()
             self.db_registered_product.create_keys()
 
-            #We get the categories from the database
-            categories_tuple = self.db_category.get_categories()
-            for category in categories_tuple:
-                pass
+            #We feed the products for each get_categories
+            self.db_injection.feed_products("update")
+
+            #for each ref from saved_products_ref_tuple:
+            for product_ref in saved_products_ref_tuple:
+                product_id = self.db_product.select_product_from_ref(product_ref)
+                print(product_id)
+                if product_id:
+                    print('injection produit disponible')
+                    self.db_registered_product.inject_product(product_ref, 'disponible')
+                else:
+                    print('injection produit indisponible')
+                    self.db_registered_product.inject_product(product_ref, 'indisponible')
 
 
-        # Si update_decision is True
-        # Je récupère les ref des produits enregistrés dans un tableau
-        # Je supprime la base produit et produits enregistrés
-        # Je les recrées
-        # Pour chaque catégorie dans la db:
-            #je relance la procédure d'injection produit présent dans db creation sa race (a initier dans __init__)
-        # Pour chaque produits enregistrés dans la liste:
-            #s'il est présent dans la table produit:
-                #je le réinjecte avec le statut Disponible
-            #sinon, je le réinjecte avec le statut plus disponible
+            #Don't forget to update the update date
 
     def __update_decision(self):
         """ This method decides if an update of the database has to be done """

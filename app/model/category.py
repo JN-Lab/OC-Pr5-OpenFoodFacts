@@ -36,7 +36,10 @@ class CategoryDatabase:
         """ This method gets the categories selected for the app """
         with SQLconnexion() as connexion:
             with connexion.cursor() as cursor:
+                categories = []
                 sql = "SELECT category_name FROM Category"
-                cursor.execute(sql)
-                result = cursor.fetchall()
-                return result
+                rows = cursor.execute(sql)
+                for row in range(rows):
+                    category = cursor.fetchone()
+                    categories.append(category[0])
+                return categories

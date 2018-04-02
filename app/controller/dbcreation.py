@@ -30,4 +30,4 @@ class CreateDatabase:
 
         # Databases are feed
         self.db_injection.feed_categories()
-        self.db_injection.feed_products()
+        self.db_injection.feed_products("create")

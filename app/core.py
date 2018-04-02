@@ -4,6 +4,7 @@
 import argparse
 
 from controller.dbcreation import CreateDatabase
+from controller.dbupdate import UpdateDatabase
 
 def parse_arguments():
 
@@ -19,10 +20,9 @@ def main():
     if args.database == 'create':
         database = CreateDatabase()
         database.prepare()
-        database.feed_categories()
-        database.feed_products()
     elif args.database == 'update':
-        pass
+        database = UpdateDatabase()
+        database.update_database()
 
 if __name__ == "__main__":
     main()
