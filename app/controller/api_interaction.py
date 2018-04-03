@@ -59,8 +59,6 @@ class OpenFoodFactsInteractions:
         """ This method find 4 pertinent categories by analyzing the repartion of
         nutrition grade on a sample of 100 products """
 
-        print("analyse de la pertinence de {}".format(category))
-
         # Look for a category with more than 1000 and less than 5000
         if product_numb > MIN_PRODUCT_NUMB and product_numb < MAX_PRODUCT_NUMB:
             sample = 100
