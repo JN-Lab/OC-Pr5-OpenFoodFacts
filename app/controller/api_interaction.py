@@ -5,11 +5,13 @@ import re
 import math
 import urllib.parse
 import requests
+from view.consoleapiview import ConsoleApiView
 from .controller_constants import *
 
 class OpenFoodFactsInteractions:
 
     def __init__(self):
+        self.interface = ConsoleApiView()
         self.category_list = []
 
     def __get_search_url(self, category, page_size, page):
@@ -32,8 +34,6 @@ class OpenFoodFactsInteractions:
         """ This method aims at getting the categories from openfoodfacts API to
         inject in database  """
 
-        print("DEBUT : recherche de catégories pertinentes")
-
         url = 'https://fr.openfoodfacts.org/categories&json=1'
 
         request = requests.get(url)
@@ -53,7 +53,7 @@ class OpenFoodFactsInteractions:
             else:
                 break
 
-        print("FIN : Les {} categories ont été sélectionnées".format(MAX_CATEGORY))
+        self.interface.end_categories_selection(MAX_CATEGORY, self.category_list)
 
     def __analyze_category_pertinence(self, category, product_numb):
         """ This method find 4 pertinent categories by analyzing the repartion of
@@ -96,8 +96,6 @@ class OpenFoodFactsInteractions:
                     min_required = score_numb / final_product_sample
                     if min_required >= 0.05:
                         number_match.append(min_required)
-
-                print(number_match)
 
                 if len(number_match) == 5:
                     return True

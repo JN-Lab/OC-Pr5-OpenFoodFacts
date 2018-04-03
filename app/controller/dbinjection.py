@@ -4,6 +4,7 @@
 from model.category import CategoryDatabase
 from model.product import ProductDatabase
 from model.update_db import LogDatabase
+from view.consoleinjectionview import ConsoleInjectionView
 from .api_interaction import OpenFoodFactsInteractions
 
 class InjectData:
@@ -13,6 +14,7 @@ class InjectData:
         self.db_category = CategoryDatabase()
         self.db_product = ProductDatabase()
         self.db_update = LogDatabase()
+        self.interface = ConsoleInjectionView()
 
     def feed_categories(self):
         """ This method injects the categories from OpenFoodFacts into the database """
@@ -31,7 +33,7 @@ class InjectData:
 
         page_size = 1000
         for category in category_list:
-            print("Injection des produits de la catégorie {}".format(category))
+            self.interface.product_injection_per_category(category)
             page_number = self.api.get_product_pages_number(category, str(page_size))
             for page in range(1, page_number + 1, 1):
                 data = self.api.get_product_page(category, str(page_size), str(page))
