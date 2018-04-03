@@ -32,7 +32,7 @@ class CategoryDatabase:
                     cursor.execute(sql, (category))
                 connexion.commit()
 
-    def get_categories(self):
+    def get_categories_name(self):
         """ This method gets the categories selected for the app """
         with SQLconnexion() as connexion:
             with connexion.cursor() as cursor:
@@ -43,3 +43,11 @@ class CategoryDatabase:
                     category = cursor.fetchone()
                     categories.append(category[0])
                 return categories
+
+    def get_categories_with_id(self):
+        with SQLconnexion() as connexion:
+            with connexion.cursor() as cursor:
+                sql = "SELECT id, category_name FROM Category"
+                cursor.execute(sql)
+                result = cursor.fetchall()
+                return result

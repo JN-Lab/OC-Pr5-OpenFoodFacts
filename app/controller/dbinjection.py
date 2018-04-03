@@ -29,7 +29,7 @@ class InjectData:
         if status == "create":
             category_list = self.api.category_list
         elif status == "update":
-            category_list = self.db_category.get_categories()
+            category_list = self.db_category.get_categories_name()
 
         page_size = 1000
         for category in category_list:
