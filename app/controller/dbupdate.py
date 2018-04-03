@@ -5,6 +5,7 @@ from model.update_db import LogDatabase
 from model.product import ProductDatabase
 from model.registered_product import RegisteredProductDatabase
 from model.category import CategoryDatabase
+from view.consoleupdateview import ConsoleUpdateView
 from .dbinjection import InjectData
 
 class UpdateDatabase:
@@ -16,15 +17,15 @@ class UpdateDatabase:
         self.db_category = CategoryDatabase()
         self.db_product = ProductDatabase()
         self.db_injection = InjectData()
+        self.interface = ConsoleUpdateView()
 
         self.update = self.__update_decision()
 
     def update_database(self):
         """ This method updates the database with modification identified in API response """
         if self.update:
+            self.interface.start_update()
             saved_products_ref_list = self.db_registered_product.get_products_ref()
-            print(saved_products_ref_list)
-            print(type(saved_products_ref_list))
 
             #We delete registered_product and product tables and recreate them empty
             self.db_registered_product.create_db()
@@ -32,6 +33,7 @@ class UpdateDatabase:
             self.db_registered_product.create_keys()
 
             #We feed the products for each get_categories
+            self.interface.start_feed_product()
             self.db_injection.feed_products("update")
 
             #for each ref from saved_products_ref_tuple:
@@ -47,6 +49,7 @@ class UpdateDatabase:
 
             #Don't forget to update the update date
             self.db_update.inject_update_date()
+            self.interface.end_update()
 
     def __update_decision(self):
         """ This method decides if an update of the database has to be done """

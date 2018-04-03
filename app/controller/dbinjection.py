@@ -31,13 +31,13 @@ class InjectData:
 
         page_size = 1000
         for category in category_list:
+            print("Injection des produits de la catégorie {}".format(category))
             page_number = self.api.get_product_pages_number(category, str(page_size))
             for page in range(1, page_number + 1, 1):
                 data = self.api.get_product_page(category, str(page_size), str(page))
                 self.__manage_products_injection(data['products'], category)
 
     def __manage_products_injection(self, data, category):
-        print("Injection des produits de la catégorie {}".format(category))
         for product in data:
             product_info = self.__get_product_information(product)
             if product_info['injection']:
