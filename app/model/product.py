@@ -58,3 +58,15 @@ class ProductDatabase:
                 cursor.execute(sql, (category_id))
                 result = cursor.fetchall()
                 return result
+
+    def get_subsitute_products(self, category_id):
+        with SQLconnexion() as connexion:
+            with connexion.cursor() as cursor:
+                sql = """SELECT product_name, product_description, store, website_link, nutriscore
+                    FROM Product
+                    WHERE category_id = %s AND nutriscore = 'a'
+                    ORDER BY RAND()
+                    LIMIT 5"""
+                cursor.execute(sql, (category_id))
+                result = cursor.fetchall()
+                return result

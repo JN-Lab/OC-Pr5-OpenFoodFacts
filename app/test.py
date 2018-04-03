@@ -26,8 +26,7 @@ def main():
         database.update_database()
 
     application = Application()
-    application.category_selection()
-    application.product_selection()
+    application.start()
 
 if __name__ == "__main__":
     main()
