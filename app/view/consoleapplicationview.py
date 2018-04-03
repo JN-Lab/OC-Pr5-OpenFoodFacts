@@ -44,6 +44,19 @@ class ConsoleApplicationView:
             print("    - Nutriscore : {}".format(product[4]))
             print("\n")
 
+    def print_save_product_question(self):
+        print("""\nSouhaitez-vous enregitrer l'un des produit de substitution?
+        (Y pour oui / N pour non)""")
+
+    def print_product_to_save_question(self):
+        print("\nVeuillez indiquer le chiffre du produit à enregistrer")
+
+    def print_selected_product_to_save(self, subst_prd_tuple, product_index):
+        print("\n Enregistrement du produit :  {}".format(subst_prd_tuple[product_index][0]))
+
+    def print_bye_bye_message(self):
+        print("A plus dans le bus")
+
     def print_error_input_not_int(self):
         """ This method prints an error message when the user indicates
         a string instead of a number """

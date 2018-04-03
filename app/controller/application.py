@@ -24,6 +24,7 @@ class Application:
         self.category_selection()
         self.product_selection()
         self.selected_substitute_products()
+        self.save_substitute_product()
 
     def category_selection(self):
         """ This method manages the category selection """
@@ -57,3 +58,26 @@ class Application:
 
         self.subst_prd_tuple = self.db_product.get_subsitute_products(self.cat_id_selected)
         self.interface.print_subsitute_products(self.subst_prd_tuple)
+
+    def save_substitute_product(self):
+        self.interface.print_save_product_question()
+        answer = 'W'
+        while answer != 'Y' and answer != 'N':
+            answer = input("Votre réponse: ").upper()
+
+        if answer == 'Y':
+            self.interface.print_product_to_save_question()
+            prd_number = self.__prd_input(self.subst_prd_tuple)
+            self.interface.print_selected_product_to_save(self.subst_prd_tuple, prd_number - 1)
+        else:
+            self.interface.print_bye_bye_message()
+
+    def __prd_input(self, product_tuple):
+        prd_number = 0
+        while prd_number < 1 and prd_number > len(product_tuple):
+            try:
+                prd_number = int(input("numéro de produit: "))
+            except:
+                self.interface.print_error_input_not_int()
+
+        return prd_number
