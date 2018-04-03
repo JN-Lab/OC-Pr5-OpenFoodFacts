@@ -43,13 +43,7 @@ class Application:
 
         self.prd_tuple = self.db_product.get_dirty_product_from_category(self.cat_id_selected)
         self.interface.print_product_selection(self.prd_tuple)
-        prd_number = 0
-        while prd_number < 1 or prd_number > len(self.prd_tuple):
-            try:
-                prd_number = int(input("numéro de produit: "))
-            except:
-                self.interface.print_error_input_not_int()
-
+        prd_number = self.__prd_input(self.prd_tuple)
         #prd_number - 1 because index starts from zero
         self.prd_id_selected = self.prd_tuple[prd_number - 1][0]
         self.interface.print_product_selected(self.prd_tuple, prd_number - 1)
