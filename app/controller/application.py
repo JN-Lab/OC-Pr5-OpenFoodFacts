@@ -3,6 +3,7 @@
 
 from model.category import CategoryDatabase
 from model.product import ProductDatabase
+from model.registered_product import RegisteredProductDatabase
 from view.consoleapplicationview import ConsoleApplicationView
 
 class Application:
@@ -11,6 +12,7 @@ class Application:
         self.interface = ConsoleApplicationView()
         self.db_category = CategoryDatabase()
         self.db_product = ProductDatabase()
+        self.db_registered_product = RegisteredProductDatabase()
 
         self.cat_information = ()
         self.cat_id_selected = 0
@@ -49,26 +51,34 @@ class Application:
         self.interface.print_product_selected(self.prd_tuple, prd_number - 1)
 
     def selected_substitute_products(self):
+        """ This method manages the selection of substitute products """
 
         self.subst_prd_tuple = self.db_product.get_subsitute_products(self.cat_id_selected)
         self.interface.print_subsitute_products(self.subst_prd_tuple)
 
     def save_substitute_product(self):
-        self.interface.print_save_product_question()
-        answer = 'W'
-        while answer != 'Y' and answer != 'N':
-            answer = input("Votre réponse: ").upper()
+        """ This method manages the substitute product registered feature """
 
-        if answer == 'Y':
-            self.interface.print_product_to_save_question()
-            prd_number = self.__prd_input(self.subst_prd_tuple)
-            self.interface.print_selected_product_to_save(self.subst_prd_tuple, prd_number - 1)
-        else:
-            self.interface.print_bye_bye_message()
+        save = True
+        while save:
+            self.interface.print_save_product_question()
+            answer = 'W'
+            while answer != 'Y' and answer != 'N':
+                answer = input("Votre réponse: ").upper()
+
+            if answer == 'Y':
+                self.interface.print_product_to_save_question()
+                prd_number = self.__prd_input(self.subst_prd_tuple)
+                self.interface.print_selected_product_to_save(self.subst_prd_tuple, prd_number - 1)
+                self.db_registered_product.inject_product(self.subst_prd_tuple[prd_number - 1][5], 'disponible')
+                # il manque la gestion du problème d'enregistrement double directement au niveau db
+            else:
+                save = False
+                self.interface.print_bye_bye_message()
 
     def __prd_input(self, product_tuple):
         prd_number = 0
-        while prd_number < 1 and prd_number > len(product_tuple):
+        while prd_number < 1 or prd_number > len(product_tuple):
             try:
                 prd_number = int(input("numéro de produit: "))
             except:

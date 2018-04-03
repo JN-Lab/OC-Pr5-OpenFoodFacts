@@ -42,6 +42,7 @@ class ConsoleApplicationView:
             print("    - Store : {}".format(product[2]))
             print("    - Url : {}".format(product[3]))
             print("    - Nutriscore : {}".format(product[4]))
+            print("    - Code : {}".format(product[5]))
             print("\n")
 
     def print_save_product_question(self):
