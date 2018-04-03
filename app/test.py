@@ -27,6 +27,7 @@ def main():
 
     application = Application()
     application.category_selection()
+    application.product_selection()
 
 if __name__ == "__main__":
     main()

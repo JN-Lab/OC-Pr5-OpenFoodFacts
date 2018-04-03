@@ -46,3 +46,15 @@ class ProductDatabase:
                 cursor.execute(sql, (product_ref))
                 result = cursor.fetchone()
                 return result[0]
+
+    def get_dirty_product_from_category(self, category_id):
+        with SQLconnexion() as connexion:
+            with connexion.cursor() as cursor:
+                sql = """SELECT id, product_name FROM Product
+                    WHERE category_id = %s AND (
+                        nutriscore = 'd' OR nutriscore = 'e')
+                    ORDER BY RAND()
+                    LIMIT 10"""
+                cursor.execute(sql, (category_id))
+                result = cursor.fetchall()
+                return result
