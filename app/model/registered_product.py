@@ -48,6 +48,19 @@ class RegisteredProductDatabase:
                     products_ref.append(product_ref[0])
                 return products_ref
 
+    def get_product_from_ref(self, product_ref):
+        """ This method get (if saved) the product id from Product_registered
+        database"""
+        with SQLconnexion() as connexion:
+            with connexion.cursor() as cursor:
+                sql = """SELECT product_id FROM Product_registered
+                    INNER JOIN Product
+                        ON Product_registered.product_id = Product.id
+                    WHERE Product.product_sku = %s"""
+                cursor.execute(sql, (product_ref))
+                result = cursor.fetchone()
+                return result
+
     def inject_product(self, product_ref, availability):
         """ This method injects a product with its availability
         availability arg can only have two values : 'disponible'

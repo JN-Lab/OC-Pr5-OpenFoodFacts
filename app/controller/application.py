@@ -69,8 +69,7 @@ class Application:
             if answer == 'Y':
                 self.interface.print_product_to_save_question()
                 prd_number = self.__prd_input(self.subst_prd_tuple)
-                self.interface.print_selected_product_to_save(self.subst_prd_tuple, prd_number - 1)
-                self.db_registered_product.inject_product(self.subst_prd_tuple[prd_number - 1][5], 'disponible')
+                self.__product_save_process(self.subst_prd_tuple[prd_number - 1][5])
                 # il manque la gestion du problème d'enregistrement double directement au niveau db
                 #(voir clef unique sur product id dans db_registered + rajout IGNORE dans l'INSERT)
                 # Faudra gérer également le message 'produit deja enregistré'
@@ -82,6 +81,7 @@ class Application:
         """ Pour gérer la boucle infini du start. Apres selection, demandez si refaire une nouvelle recherche """
 
     def __prd_input(self, product_tuple):
+        """ This method manages the product selection """
         prd_number = 0
         while prd_number < 1 or prd_number > len(product_tuple):
             try:
@@ -90,3 +90,13 @@ class Application:
                 self.interface.print_error_input_not_int()
 
         return prd_number
+
+    def __product_save_process(self, product_ref):
+        """ This private method manages the process to save a product """
+        product_to_save = self.db_registered_product.get_product_from_ref(product_ref)
+        #Si le produit a déjà été enregistré
+        if product_to_save:
+            self.interface.print_product_already_saved()
+        else:
+            self.db_registered_product.inject_product(product_ref, 'disponible')
+            self.interface.print_selected_product_to_save()
