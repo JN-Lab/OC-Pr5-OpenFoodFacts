@@ -18,19 +18,25 @@ class Application:
         self.cat_id_selected = 0
 
         self.prd_tuple = ()
-        self.prd_id_selected = 0
 
         self.subst_prd_tuple = ()
 
+        self.play = True
+
     def start(self):
-        self.category_selection()
-        self.product_selection()
-        self.selected_substitute_products()
-        self.save_substitute_product()
+        """ This method manages the different steps of the application"""
+        while self.play:
+            self.category_selection()
+            self.product_selection()
+            self.selected_substitute_products()
+            self.save_substitute_product()
+            self.new_selection()
 
     def category_selection(self):
         """ This method manages the category selection """
 
+        #We intialize for each loop the cat_id_selected in order to ask everytime the category
+        self.cat_id_selected = 0
         self.cat_information = self.db_category.get_categories_with_id()
         self.interface.print_category_selection(self.cat_information)
         while self.cat_id_selected < 1 or self.cat_id_selected > len(self.cat_information):
@@ -47,7 +53,6 @@ class Application:
         self.interface.print_product_selection(self.prd_tuple)
         prd_number = self.__prd_input(self.prd_tuple)
         #prd_number - 1 because index starts from zero
-        self.prd_id_selected = self.prd_tuple[prd_number - 1][0]
         self.interface.print_product_selected(self.prd_tuple, prd_number - 1)
 
     def selected_substitute_products(self):
@@ -70,15 +75,23 @@ class Application:
                 self.interface.print_product_to_save_question()
                 prd_number = self.__prd_input(self.subst_prd_tuple)
                 self.__product_save_process(self.subst_prd_tuple[prd_number - 1][5])
-                # il manque la gestion du problème d'enregistrement double directement au niveau db
-                #(voir clef unique sur product id dans db_registered + rajout IGNORE dans l'INSERT)
-                # Faudra gérer également le message 'produit deja enregistré'
             else:
                 save = False
-                self.interface.print_bye_bye_message()
+                self.interface.print_end_save_process_message()
 
     def new_selection(self):
-        """ Pour gérer la boucle infini du start. Apres selection, demandez si refaire une nouvelle recherche """
+        """ This method manages the process of reloading a research or stopping
+        the application """
+        self.interface.print_new_search()
+        answer = 'W'
+        while answer != 'Y' and answer != 'N':
+            answer = input("Votre réponse: ").upper()
+
+        if answer == 'Y':
+            self.play = True
+        else:
+            self.play = False
+            self.interface.print_good_bye_message()
 
     def __prd_input(self, product_tuple):
         """ This method manages the product selection """

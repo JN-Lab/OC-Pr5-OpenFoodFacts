@@ -46,23 +46,30 @@ class ConsoleApplicationView:
             print("\n")
 
     def print_save_product_question(self):
-        print("""\nSouhaitez-vous enregitrer l'un des produit de substitution?
+        print("""\nSouhaitez-vous enregitrer l'un des produits de substitution?
         (Y pour oui / N pour non)""")
 
     def print_product_to_save_question(self):
-        print("\nVeuillez indiquer le chiffre du produit à enregistrer")
+        print("\n Veuillez indiquer le chiffre du produit à enregistrer")
 
     def print_selected_product_to_save(self):
         print("\n Le produit a été enregistré")
 
-    def print_bye_bye_message(self):
-        print("A plus dans le bus")
+    def print_end_save_process_message(self):
+        print("\n Retour au menu")
 
     def print_product_already_saved(self):
         print("Le Produit a déjà été enregistré")
+
+    def print_new_search(self):
+        print("""\n Souhaitez-vous faire une nouvelle recherche?
+        (Y pour oui / N pour non)""")
+
+    def print_good_bye_message(self):
+        print("\n Merci d'avoir utilisé l'application. Au revoir")
 
     def print_error_input_not_int(self):
         """ This method prints an error message when the user indicates
         a string instead of a number """
 
-        print("\nVeuillez indiquer le chiffre et non le nom de votre choix")
+        print("\n Veuillez indiquer le chiffre et non le nom de votre choix")
