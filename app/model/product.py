@@ -17,11 +17,11 @@ class ProductDatabase:
             with connexion.cursor() as cursor:
                 sql = """CREATE TABLE Product (
                     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-                    product_name VARCHAR(200) NOT NULL,
+                    product_name TEXT NOT NULL,
                     product_sku BIGINT UNSIGNED NOT NULL,
                     product_description TEXT,
                     store VARCHAR(200),
-                    website_link VARCHAR(250),
+                    website_link TEXT,
                     nutriscore CHAR(1) NOT NULL,
                     category_id TINYINT UNSIGNED NOT NULL,
                     PRIMARY KEY (id)

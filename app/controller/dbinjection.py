@@ -18,18 +18,14 @@ class InjectData:
 
     def feed_categories(self):
         """ This method injects the categories from OpenFoodFacts into the database """
-        self.api.get_categories()
+        #self.api.get_categories()
         self.db_category.inject_categories(self.api.category_list)
 
-    def feed_products(self, status):
+    def feed_products(self):
         """ This method injects the products linked to the categories selected
         into the database """
 
-        category_list = []
-        if status == "create":
-            category_list = self.api.category_list
-        elif status == "update":
-            category_list = self.db_category.get_categories_name()
+        category_list = self.db_category.get_categories_name()
 
         page_size = 1000
         for category in category_list:

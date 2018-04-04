@@ -34,7 +34,7 @@ class UpdateDatabase:
 
             #We feed the products for each get_categories
             self.interface.start_feed_product()
-            self.db_injection.feed_products("update")
+            self.db_injection.feed_products()
 
             #for each ref from saved_products_ref_tuple:
             for product_ref in saved_products_ref_list:
