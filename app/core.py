@@ -5,6 +5,7 @@ import argparse
 
 from controller.dbcreation import CreateDatabase
 from controller.dbupdate import UpdateDatabase
+from controller.application import Application
 
 def parse_arguments():
 
@@ -23,6 +24,9 @@ def main():
     elif args.database == 'update':
         database = UpdateDatabase()
         database.update_database()
+
+    application = Application()
+    application.start()
 
 if __name__ == "__main__":
     main()
