@@ -34,9 +34,7 @@ class Application:
 
     def category_selection(self):
         """ This method manages the category selection """
-
-        #We intialize for each loop the cat_id_selected in order to ask everytime the category
-        self.cat_id_selected = 0
+        self.cat_id_selected = 0 #to be sure to ask category each time
         self.cat_information = self.db_category.get_categories_with_id()
         self.interface.print_category_selection(self.cat_information)
         while self.cat_id_selected < 1 or self.cat_id_selected > len(self.cat_information):
