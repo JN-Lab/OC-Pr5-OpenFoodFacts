@@ -61,6 +61,19 @@ class RegisteredProductDatabase:
                 result = cursor.fetchone()
                 return result
 
+    def get_all_products_saved(self):
+        with SQLconnexion() as connexion:
+            with connexion.cursor() as cursor:
+                sql = """SELECT product_name, product_description, store,
+                                website_link, nutriscore, product_sku
+                    FROM Product
+                    INNER JOIN Product_registered
+                        ON Product.id = Product_registered.product_id
+                    WHERE Product_registered.product_id IS NOT NULL"""
+                cursor.execute(sql)
+                result = cursor.fetchall()
+                return result
+
     def inject_product(self, product_ref, availability):
         """ This method injects a product with its availability
         availability arg can only have two values : 'disponible'

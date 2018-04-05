@@ -26,11 +26,16 @@ class Application:
     def start(self):
         """ This method manages the different steps of the application"""
         while self.play:
-            self.category_selection()
-            self.product_selection()
-            self.selected_substitute_products()
-            self.save_substitute_product()
-            self.new_selection()
+            action = self.action_choice()
+            if action == 'research':
+                self.category_selection()
+                self.product_selection()
+                self.selected_substitute_products()
+                self.save_substitute_product()
+            else:
+                self.consult_product_saved()
+            #Quit or new action?
+            self.new_action()
 
     def category_selection(self):
         """ This method manages the category selection """
@@ -77,10 +82,10 @@ class Application:
                 save = False
                 self.interface.print_end_save_process_message()
 
-    def new_selection(self):
+    def new_action(self):
         """ This method manages the process of reloading a research or stopping
         the application """
-        self.interface.print_new_search()
+        self.interface.print_new_action()
         answer = 'W'
         while answer != 'Y' and answer != 'N':
             answer = input("Votre réponse: ").upper()
@@ -90,6 +95,25 @@ class Application:
         else:
             self.play = False
             self.interface.print_good_bye_message()
+
+    def action_choice(self):
+        """This method manages the choice of the user between doing a research
+        or seeing his saved products"""
+        self.interface.print_action_choice()
+        answer = 0
+        while answer != 1 and answer != 2:
+            try:
+                answer = int(input("Votre choix:"))
+            except:
+                self.interface.print_error_input_not_int()
+
+        if answer == 1:
+            return 'research'
+
+    def consult_product_saved(self):
+        """ This method prints all the products saved by the user"""
+        products = self.db_registered_product.get_all_products_saved()
+        self.interface.print_products_saved(products)
 
     def __prd_input(self, product_tuple):
         """ This method manages the product selection """

@@ -61,9 +61,27 @@ class ConsoleApplicationView:
     def print_product_already_saved(self):
         print("Le Produit a déjà été enregistré")
 
-    def print_new_search(self):
-        print("""\n Souhaitez-vous faire une nouvelle recherche?
+    def print_new_action(self):
+        print("""\n Souhaitez-vous faire une nouvelle action?
         (Y pour oui / N pour non)""")
+
+    def print_action_choice(self):
+        print("\n Que souhaitez-vous faire?")
+        print("   1 -> Chercher un produit de substitution")
+        print("   2 -> Consulter vos produits enregistrés")
+        print("""Veuillez indiquez le numéro correspondant à votre choix
+         s'il vous plait""")
+
+    def print_products_saved(self, product_tuple):
+        print("\nVoici les produits que vous avez enregistrés:")
+        for index, product in enumerate(product_tuple):
+            print("{} -> Produit : {}".format(index + 1, product[0]))
+            print("    - Description : {}".format(product[1]))
+            print("    - Store : {}".format(product[2]))
+            print("    - Url : {}".format(product[3]))
+            print("    - Nutriscore : {}".format(product[4]))
+            print("    - Code : {}".format(product[5]))
+            print("\n")
 
     def print_good_bye_message(self):
         print("\n Merci d'avoir utilisé l'application. Au revoir")
