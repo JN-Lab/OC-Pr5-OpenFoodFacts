@@ -23,7 +23,7 @@ def main():
         database.prepare()
     elif args.database == 'update':
         database = UpdateDatabase()
-        database.update_database()
+        database.update_database(True)
 
     application = Application()
     application.start()

@@ -21,9 +21,9 @@ class UpdateDatabase:
 
         self.update = self.__update_decision()
 
-    def update_database(self):
+    def update_database(self, force=False):
         """ This method updates the database with modification identified in API response """
-        if self.update:
+        if self.update or force:
             self.interface.start_update()
             saved_products_ref_list = self.db_registered_product.get_products_ref()
 

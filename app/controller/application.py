@@ -5,6 +5,7 @@ from model.category import CategoryDatabase
 from model.product import ProductDatabase
 from model.registered_product import RegisteredProductDatabase
 from view.consoleapplicationview import ConsoleApplicationView
+from .dbupdate import UpdateDatabase
 
 class Application:
 
@@ -13,12 +14,11 @@ class Application:
         self.db_category = CategoryDatabase()
         self.db_product = ProductDatabase()
         self.db_registered_product = RegisteredProductDatabase()
+        self.update = UpdateDatabase()
 
         self.cat_information = ()
         self.cat_id_selected = 0
-
         self.prd_tuple = ()
-
         self.subst_prd_tuple = ()
 
         self.play = True
@@ -26,6 +26,7 @@ class Application:
     def start(self):
         """ This method manages the different steps of the application"""
         while self.play:
+            self.update.update_database()
             action = self.action_choice()
             if action == 'research':
                 self.category_selection()
