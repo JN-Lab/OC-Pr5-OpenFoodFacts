@@ -30,6 +30,7 @@ class CreateDatabase:
         self.db_update.create_db()
 
         # Foreign keys are created
+        self.db_product.create_keys()
         self.db_registered_product.create_keys()
 
         # Databases are feed

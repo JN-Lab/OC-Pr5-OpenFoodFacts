@@ -31,6 +31,7 @@ class UpdateDatabase:
             #We delete registered_product and product tables and recreate them empty
             self.db_registered_product.create_db()
             self.db_product.create_db()
+            self.db_product.create_keys()
             self.db_registered_product.create_keys()
 
             #We feed the products for each get_categories
