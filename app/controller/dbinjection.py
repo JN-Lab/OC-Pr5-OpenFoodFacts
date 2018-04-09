@@ -61,6 +61,8 @@ class InjectData:
 
         try:
             product_info['score'] = product['nutrition_grade_fr']
+            if not product_info['score'].strip():
+                raise KeyError
         except KeyError:
             product_info['score'] = 'NULL'
             product_info['injection'] = False

@@ -23,7 +23,7 @@ L'utilisateur sélectionne 1. Le programme pose les questions suivantes à l'uti
 * La recherche doit s'effectuer sur une base MySql.
 
 ## Pré-requis
-Il est nécessaire dans un premier temps de créer une base de donnée et de remplir les informations de connexion à cette dernière dans le fichier password.py.dist présent dans le répertoire app/model.
+Il est nécessaire dans un premier temps de créer une base de donnée et de remplir les informations de connexion à cette dernière dans le fichier **password.py.dist** présent dans le répertoire app/model.
 Il faut également enlever l'extension dist.
 
 ## Installation
@@ -33,14 +33,14 @@ Afin de créer les tables et nourrir ces dernières, lors du premier lancement d
 python3 core.py -d create
 ```
 
-## Lancement de l'Application
-Pour lancer l'application, il suffit simplement d'exécuter core.py. Si vous êtes dans le répertoire app/:
+## Lancement de l'application
+Pour lancer l'application, il suffit simplement d'exécuter **core.py**. Si vous êtes dans le répertoire app/:
 
 ```
 python3 core.py
 ```
 
-## Options:
+## Options
 La mise à jour de la base de données s'effectue automatique si la dernière a eu lieu plus de 7 jours lorsque le programme s'éxecute.
 Il est cependant possible de *forcer* la mise à jour avec l'argument **-d update**. Voici un exemple si vous êtes placé directement dans le répertoire app/:
 
