@@ -27,6 +27,7 @@ class ProductDatabase:
                 cursor.execute(sql)
 
     def create_keys(self):
+        """ This method creates a foreign key on category_id data """
         with SQLconnexion() as connexion:
             with connexion.cursor() as cursor:
                 sql = """ALTER TABLE Product
@@ -36,6 +37,7 @@ class ProductDatabase:
                 cursor.execute(sql)
 
     def inject_product(self, product, category_name):
+        """ This method inject a product in Product table """
         with SQLconnexion() as connexion:
             with connexion.cursor() as cursor:
                 sql = """INSERT INTO Product
@@ -46,6 +48,8 @@ class ProductDatabase:
             connexion.commit()
 
     def select_product_from_ref(self, product_ref):
+        """ This method gets a product from product table thanks to the product
+        ref """
         with SQLconnexion() as connexion:
             with connexion.cursor() as cursor:
                 sql = """SELECT id FROM Product
@@ -55,6 +59,8 @@ class ProductDatabase:
                 return result[0]
 
     def get_dirty_product_from_category(self, category_id):
+        """ This method selects on a random way 10 products from a category_id
+        (as input) with a nutriscore equal to 'd' or 'e'  """
         with SQLconnexion() as connexion:
             with connexion.cursor() as cursor:
                 sql = """SELECT id, product_name FROM Product
@@ -67,6 +73,8 @@ class ProductDatabase:
                 return result
 
     def get_subsitute_products(self, category_id):
+        """ This method selects 5 products on a random way from a category_id
+        (as input) with  nutriscore equal to 'a' """
         with SQLconnexion() as connexion:
             with connexion.cursor() as cursor:
                 sql = """SELECT product_name, product_description, store,
