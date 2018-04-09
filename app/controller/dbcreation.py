@@ -9,6 +9,7 @@ from view.consolecreateview import ConsoleCreateView
 from .dbinjection import InjectData
 
 class CreateDatabase:
+    """ This class manages the creation of the database. """
 
     def __init__(self):
         self.db_registered_product = RegisteredProductDatabase()

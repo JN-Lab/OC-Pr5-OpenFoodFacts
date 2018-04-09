@@ -3,9 +3,8 @@
 from .dbconnexion import SQLconnexion
 
 class RegisteredProductDatabase:
-
-    def __init__(self):
-        pass
+    """ This class groups all the necessary SQL request linked to the
+    Product_registered table """
 
     def create_db(self):
         """ This method creates the database to save products """

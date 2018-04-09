@@ -6,6 +6,7 @@ import requests
 from view.consoleapiview import ConsoleApiView
 
 class OpenFoodFactsInteractions:
+    """ This class manages all the interactions with the OpenFoodFacts API """
 
     def __init__(self):
         self.interface = ConsoleApiView()

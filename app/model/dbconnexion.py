@@ -5,6 +5,7 @@ from .password import *
 import pymysql
 
 class SQLconnexion(object):
+    """ Context Manager to deals with the SQL connexion to the database """
 
     def __init__(self):
         self.host = HOST

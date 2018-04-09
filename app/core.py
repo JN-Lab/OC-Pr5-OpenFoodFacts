@@ -8,6 +8,8 @@ from controller.dbupdate import UpdateDatabase
 from controller.application import Application
 
 def parse_arguments():
+    """ This function creates the needed arguments to create and updates
+    the database manually """
 
     parser = argparse.ArgumentParser()
     parser.add_argument('-d', '--database', help="""Action on Database. Type
@@ -16,6 +18,8 @@ def parse_arguments():
     return parser.parse_args()
 
 def main():
+    """ This is the main function """
+
     args = parse_arguments()
 
     if args.database == 'create':

@@ -8,6 +8,8 @@ from view.consoleinjectionview import ConsoleInjectionView
 from .api_interaction import OpenFoodFactsInteractions
 
 class InjectData:
+    """ This class manages all the actions linked to data injection into
+    the database """
 
     def __init__(self):
         self.api = OpenFoodFactsInteractions()
@@ -41,7 +43,7 @@ class InjectData:
             if product_info['injection']:
                 self.db_product.inject_product(product_info, category)
 
-    def __get_product_information(self,product):
+    def __get_product_information(self, product):
         """ This method cleans and get the needed product informations """
 
         product_info = {

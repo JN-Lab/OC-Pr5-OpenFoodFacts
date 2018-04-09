@@ -8,6 +8,9 @@ from view.consoleapplicationview import ConsoleApplicationView
 from .dbupdate import UpdateDatabase
 
 class Application:
+    """ This class is the main class of the program. It manages the main loop
+    and all the necessary features. The start() method is the brain of the
+    application and triggers all the features when it is necessary. """
 
     def __init__(self):
         self.interface = ConsoleApplicationView()

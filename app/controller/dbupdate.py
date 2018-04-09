@@ -9,6 +9,7 @@ from view.consoleupdateview import ConsoleUpdateView
 from .dbinjection import InjectData
 
 class UpdateDatabase:
+    """ This class manages all the actions linked to the update of the database """
 
     def __init__(self):
         self.daily_date = datetime.date.today()

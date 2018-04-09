@@ -2,9 +2,7 @@
 # coding: utf-8
 
 class ConsoleCreateView:
-
-    def __init__(self):
-        pass
+    """ This class groups all the console's messages linked to database creation """
 
     def start_db_creation(self):
         print("Création des bases de données")

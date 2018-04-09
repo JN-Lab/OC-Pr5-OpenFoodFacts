@@ -3,9 +3,7 @@
 from .dbconnexion import SQLconnexion
 
 class ProductDatabase:
-
-    def __init__(self):
-        pass
+    """ This class groups all the necessary SQL request linked to the Product table """
 
     def create_db(self):
         """ This method creates the product database """
@@ -62,7 +60,8 @@ class ProductDatabase:
     def get_subsitute_products(self, category_id):
         with SQLconnexion() as connexion:
             with connexion.cursor() as cursor:
-                sql = """SELECT product_name, product_description, store, website_link, nutriscore, product_sku
+                sql = """SELECT product_name, product_description, store,
+                    website_link, nutriscore, product_sku
                     FROM Product
                     WHERE category_id = %s AND nutriscore = 'a'
                     ORDER BY RAND()

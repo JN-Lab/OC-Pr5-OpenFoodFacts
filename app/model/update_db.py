@@ -3,9 +3,8 @@
 from .dbconnexion import SQLconnexion
 
 class LogDatabase:
-
-    def __init__(self):
-        pass
+    """ This class groups all the necessary SQL request linked to the
+    Database_update table """
 
     def create_db(self):
         """ This method creates the database to manage the update """

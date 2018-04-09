@@ -2,9 +2,7 @@
 # coding: utf-8
 
 class ConsoleApiView:
-
-    def __init__(self):
-        pass
+    """ This class manages the console's messages for the interactions with the API """
 
     def end_categories_selection(self, category_number, category_list):
         print("les {} catégories ont été sélectionnées".format(category_number))
