@@ -81,6 +81,7 @@ class ConsoleApplicationView:
             print("    - Url : {}".format(product[3]))
             print("    - Nutriscore : {}".format(product[4]))
             print("    - Code : {}".format(product[5]))
+            print("    - Etat : {}".format(product[6]))
             print("\n")
 
     def print_good_bye_message(self):

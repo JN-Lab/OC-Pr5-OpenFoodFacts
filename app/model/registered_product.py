@@ -65,7 +65,8 @@ class RegisteredProductDatabase:
         with SQLconnexion() as connexion:
             with connexion.cursor() as cursor:
                 sql = """SELECT product_name, product_description, store,
-                                website_link, nutriscore, product_sku
+                                website_link, nutriscore, product_sku,
+                                product_availability
                     FROM Product
                     INNER JOIN Product_registered
                         ON Product.id = Product_registered.product_id
