@@ -67,6 +67,8 @@ class InjectData:
 
         try:
             product_info['name'] = product['product_name_fr']
+            if not product_info['name'].strip():
+                raise KeyError
         except KeyError:
             product_info['name'] = 'NULL'
             product_info['injection'] = False

@@ -56,5 +56,5 @@ class UpdateDatabase:
         last_update_date = self.db_update.get_last_update_date() #type: datetime.date
         duration = self.daily_date - last_update_date #type: datetime.timedelta
 
-        if duration.days >= 0:
+        if duration.days >= 7:
             return True
