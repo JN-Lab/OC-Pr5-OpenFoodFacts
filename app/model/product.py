@@ -3,7 +3,8 @@
 from .dbconnexion import SQLconnexion
 
 class ProductDatabase:
-    """ This class groups all the necessary SQL request linked to the Product table """
+    """ This class groups all the necessary SQL request linked to the
+    Product table """
 
     def create_db(self):
         """ This method creates the product database """
@@ -41,13 +42,15 @@ class ProductDatabase:
         with SQLconnexion() as connexion:
             with connexion.cursor() as cursor:
                 sql = """INSERT INTO Product
-                    (product_name, product_sku, product_description, store, website_link, nutriscore, category_id)
+                    (product_name, product_sku, product_description, store,
+                    website_link, nutriscore, category_id)
                     SELECT %s, %s, %s, %s, %s, %s, id AS cat_id
                     FROM Category WHERE category_name = %s"""
-                cursor.execute(sql, (product['name'], product['ref'], product['description'], product['store'], product['url'], product['score'], category_name))
+                cursor.execute(sql, (product['name'], product['ref'], product['description'], \
+                            product['store'], product['url'], product['score'], category_name))
             connexion.commit()
 
-    def select_product_from_ref(self, product_ref):
+    def get_product_from_ref(self, product_ref):
         """ This method gets a product from product table thanks to the product
         ref """
         with SQLconnexion() as connexion:

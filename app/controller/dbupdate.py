@@ -40,7 +40,7 @@ class UpdateDatabase:
 
             #for each ref from saved_products_ref_tuple:
             for product_ref in saved_products_ref_list:
-                product_id = self.db_product.select_product_from_ref(product_ref)
+                product_id = self.db_product.get_product_from_ref(product_ref)
                 print(product_ref)
                 if product_id:
                     print('injection produit disponible')

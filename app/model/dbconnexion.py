@@ -15,7 +15,8 @@ class SQLconnexion(object):
         self.connexion = None
 
     def __enter__(self):
-        self.connexion = pymysql.connect(host=self.host, user=self.username, passwd=self.password, db=self.database, charset='utf8mb4')
+        self.connexion = pymysql.connect(host=self.host, user=self.username, \
+                        passwd=self.password, db=self.database, charset='utf8mb4')
         return self.connexion
 
     def __exit__(self, type, value, traceback):

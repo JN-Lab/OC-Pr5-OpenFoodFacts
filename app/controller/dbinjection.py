@@ -57,39 +57,53 @@ class InjectData:
         }
 
         try:
-            product_info['url'] = product['url']
+            if product['url'].strip():
+                product_info['url'] = product['url']
+            else:
+                raise KeyError
         except KeyError:
             product_info['url'] = 'NULL'
 
         try:
-            product_info['score'] = product['nutrition_grade_fr']
-            if not product_info['score'].strip():
+            if product['nutrition_grade_fr'].strip():
+                product_info['score'] = product['nutrition_grade_fr']
+            else:
                 raise KeyError
         except KeyError:
             product_info['score'] = 'NULL'
             product_info['injection'] = False
 
         try:
-            product_info['name'] = product['product_name_fr']
-            if not product_info['name'].strip():
+            if product['product_name_fr'].strip():
+                product_info['name'] = product['product_name_fr']
+            else:
                 raise KeyError
         except KeyError:
             product_info['name'] = 'NULL'
             product_info['injection'] = False
 
         try:
-            product_info['ref'] = product['code']
+            if product['code']:
+                product_info['ref'] = str(product['code'])
+            else:
+                raise KeyError
         except KeyError:
             product_info['ref'] = 'NULL'
             product_info['injection'] = False
 
         try:
-            product_info['store'] = product['stores']
+            if product['stores'].strip():
+                product_info['store'] = product['stores']
+            else:
+                raise KeyError
         except KeyError:
             product_info['store'] = 'NULL'
 
         try:
-            product_info['description'] = product['generic_name_fr']
+            if product['generic_name_fr'].strip():
+                product_info['description'] = product['generic_name_fr']
+            else:
+                raise KeyError
         except KeyError:
             product_info['description'] = 'NULL'
 
