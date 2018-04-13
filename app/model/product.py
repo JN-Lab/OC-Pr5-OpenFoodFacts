@@ -46,8 +46,8 @@ class ProductDatabase:
                     website_link, nutriscore, category_id)
                     SELECT %s, %s, %s, %s, %s, %s, id AS cat_id
                     FROM Category WHERE category_name = %s"""
-                cursor.execute(sql, (product['name'], product['ref'], product['description'], \
-                            product['store'], product['url'], product['score'], category_name))
+                cursor.execute(sql, (product['product_name_fr'], product['code'], product['generic_name_fr'], \
+                            product['stores'], product['url'], product['nutrition_grade_fr'], category_name))
             connexion.commit()
 
     def get_product_from_ref(self, product_ref):

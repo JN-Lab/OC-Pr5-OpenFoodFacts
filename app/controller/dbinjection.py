@@ -49,62 +49,22 @@ class InjectData:
         product_info = {
             'injection' : True,
             'url' : '',
-            'score' : '',
-            'name' :'',
-            'ref' : '',
-            'store' : '',
-            'description' : ''
+            'nutrition_grade_fr' : '',
+            'product_name_fr' :'',
+            'code' : '',
+            'stores' : '',
+            'generic_name_fr' : ''
         }
 
-        try:
-            if product['url'].strip():
-                product_info['url'] = product['url']
-            else:
-                raise KeyError
-        except KeyError:
-            product_info['url'] = 'NULL'
-
-        try:
-            if product['nutrition_grade_fr'].strip():
-                product_info['score'] = product['nutrition_grade_fr']
-            else:
-                raise KeyError
-        except KeyError:
-            product_info['score'] = 'NULL'
-            product_info['injection'] = False
-
-        try:
-            if product['product_name_fr'].strip():
-                product_info['name'] = product['product_name_fr']
-            else:
-                raise KeyError
-        except KeyError:
-            product_info['name'] = 'NULL'
-            product_info['injection'] = False
-
-        try:
-            if product['code']:
-                product_info['ref'] = str(product['code'])
-            else:
-                raise KeyError
-        except KeyError:
-            product_info['ref'] = 'NULL'
-            product_info['injection'] = False
-
-        try:
-            if product['stores'].strip():
-                product_info['store'] = product['stores']
-            else:
-                raise KeyError
-        except KeyError:
-            product_info['store'] = 'NULL'
-
-        try:
-            if product['generic_name_fr'].strip():
-                product_info['description'] = product['generic_name_fr']
-            else:
-                raise KeyError
-        except KeyError:
-            product_info['description'] = 'NULL'
+        for key in product_info:
+            try:
+                if str(product[key]).split():
+                    product_info[key] = str(product[key])
+                else:
+                    raise KeyError
+            except KeyError:
+                product_info[key] = 'NULL'
+                if key == 'nutrition_grade_fr' or key == 'product_name' or key == 'code':
+                    product_info['injection'] = False
 
         return product_info
