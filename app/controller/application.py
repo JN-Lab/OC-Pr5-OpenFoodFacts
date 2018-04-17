@@ -57,7 +57,6 @@ class Application:
         """ This method manages the product selection """
 
         self.prd_tuple = self.db_product.get_dirty_product_from_category(self.cat_id_selected)
-        print(self.prd_tuple)
         self.interface.print_product_selection(self.prd_tuple)
         prd_number = self.__prd_input(self.prd_tuple)
         #prd_number - 1 because index starts from zero
